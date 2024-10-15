@@ -21,6 +21,11 @@ def plot_patient_expenses_by(df: pd.DataFrame, versnr: int, column: str) -> None
     )
     ax.legend(title=f"{column} Code", bbox_to_anchor=(1.05, 1), loc="upper left")
 
+    # Add the sum of all costs for each year above the bars
+    yearly_totals = grouped_data.sum(axis=1)
+    for i, total in enumerate(yearly_totals):
+        ax.text(i, total, f"{total:.0f} €", ha="center", va="bottom")
+
     plt.tight_layout()
     plt.show()
 
